@@ -1,0 +1,51 @@
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-lg-3 col-xl-4 col-sm-1"></div>
+      <div class="col-lg-6 col-xl-4 col-sm-10">
+         <mat-card class="text-center">
+            <mat-card-title class="my-4 pb-4 fs-2" >{{cadastrando ? 'Inscreva-se' : 'Entrar'}}</mat-card-title>
+            <mat-card-content>
+               <form [formGroup]="formulario" (ngSubmit)="submit()">
+                  <mat-form-field class="mb-1" appearance="outline" *ngIf="cadastrando">
+                     <mat-label>Nome</mat-label>
+                     <input matInput formControlName="nome" placeholder="Digite seu nome">
+                     <mat-error>{{ requiredMensagem }}</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="mb-1" appearance="outline">
+                     <mat-label>Email</mat-label>
+                     <input matInput formControlName="email" placeholder="Digite seu e-mail">
+                     <mat-error>{{ requiredMensagem + ' válido' }}</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="mb-1" appearance="outline">
+                     <mat-label>Senha</mat-label>
+                     <input matInput formControlName="senha" 
+                        [type]="hide ? 'password' : 'text'" placeholder="Digite sua senha">
+                     <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>
+                           {{ hide ? 'visibility_off' : 'visibility' }}
+                        </mat-icon>
+                     </button>
+                     <mat-error>{{ requiredMensagem }}</mat-error>
+                  </mat-form-field>
+                  <br>
+                  <button mat-flat-button type="submit" color="primary" *ngIf="!cadastrando"
+                        class="my-3">
+                     Entrar</button>
+                  <div class="my-3" *ngIf="cadastrando">
+                     <button mat-flat-button type="button" color="warn" (click)="cancelarCadastro()"
+                           class="me-3">Cancelar</button>
+                     <button mat-flat-button type="button" color="primary" (click)="cadastrar()">Inscrever-se</button>
+                  </div>
+               </form>
+
+               <a href="#" (click)="prepararCadastro()" *ngIf="!cadastrando"
+                     class="my-2">
+                  Não possui conta? Inscreva-se!</a>
+            </mat-card-content>
+         </mat-card>
+      </div>
+      <div class="col-lg-3 col-xl-4 col-sm-1"></div>
+   </div>
+</div>
