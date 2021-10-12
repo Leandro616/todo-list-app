@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
       },
       erro => {
         this.abrirSnackBar(erro.error.erros[0]);
-        this.prepararCadastro();
       });
 
   }
@@ -62,7 +61,8 @@ export class LoginComponent implements OnInit {
       }, erro => this.abrirSnackBar('Email e/ou senha incorretos!'));
   }
 
-  prepararCadastro() {
+  prepararCadastro(event: Event) {
+    event.preventDefault();
     this.cadastrando = true;
     this.formulario.reset();
   }
@@ -74,7 +74,8 @@ export class LoginComponent implements OnInit {
 
   abrirSnackBar(mensagem: string) {
     this.snackBar.open(mensagem, 'Ok', {
-      verticalPosition: 'top', horizontalPosition: 'center', direction: 'ltr'});
+      verticalPosition: 'top', horizontalPosition: 'center', 
+      direction: 'ltr', duration: 30 * 1000});
   }
 
 }

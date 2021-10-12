@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms'
 
@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatListModule } from '@angular/material/list';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,9 @@ import { AuthService } from './auth.service';
 import { ListaDeTarefasComponent } from './lista-de-tarefas/lista-de-tarefas.component';
 import { LoginComponent } from './login/login.component';
 import { TemplateModule } from './template/template.module';
+import { LayoutComponent } from './layout/layout.component';
+import { ListaDeTarefasService } from './lista-de-tarefas.service';
+import { TokenInterceptor } from './token.interceptor';
 
 
 
@@ -27,7 +31,8 @@ import { TemplateModule } from './template/template.module';
   declarations: [
     AppComponent,
     ListaDeTarefasComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -42,12 +47,20 @@ import { TemplateModule } from './template/template.module';
     MatIconModule,
     MatCardModule,
     MatSnackBarModule,
+    MatListModule,
     
 
     TemplateModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    ListaDeTarefasService,
+    // configuração do token Interceptor
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
