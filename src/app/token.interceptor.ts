@@ -25,7 +25,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
       const token = JSON.parse(tokenString);
       const jwt = token.access_token;
-      console.log('Interceptor dentro do IF', jwt)
       
       request = request.clone({
         setHeaders : {
@@ -33,7 +32,6 @@ export class TokenInterceptor implements HttpInterceptor {
         }
       })
     }
-    console.log('Interceptor fora do IF', tokenString)
     return next.handle(request);
   }
 }

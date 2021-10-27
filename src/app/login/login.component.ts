@@ -38,16 +38,17 @@ export class LoginComponent implements OnInit {
     const formValues = this.formulario.value;
     const usuario: Usuario = new Usuario(
       formValues.nome, formValues.email, formValues.senha);
-
-    this.authService.salvar(usuario)
-      .subscribe(resposta => {
-        this.abrirSnackBar("Incrição realizada com sucesso! Faça o Login");
-        this.cancelarCadastro();
-      },
-      erro => {
-        this.abrirSnackBar(erro.error.erros[0]);
-      });
-
+    
+    if (this.formulario.valid) {
+      this.authService.salvar(usuario)
+        .subscribe(resposta => {
+          this.abrirSnackBar("Incrição realizada com sucesso! Faça o Login");
+          this.cancelarCadastro();
+        },
+        erro => {
+          this.abrirSnackBar(erro.error.erros[0]);
+        });
+    }
   }
 
   submit() {
@@ -57,25 +58,32 @@ export class LoginComponent implements OnInit {
         const acessToken = JSON.stringify(resposta);
         localStorage.setItem('access_token', acessToken);
         this.router.navigate(['/todo-list'])
-        console.log('sucesso', resposta);
       }, erro => this.abrirSnackBar('Email e/ou senha incorretos!'));
   }
 
   prepararCadastro(event: Event) {
     event.preventDefault();
     this.cadastrando = true;
-    this.formulario.reset();
+    this.resetFormulario();
   }
 
   cancelarCadastro() {
     this.cadastrando = false;
-    this.formulario.reset();
+    this.resetFormulario();
   }
 
   abrirSnackBar(mensagem: string) {
     this.snackBar.open(mensagem, 'Ok', {
       verticalPosition: 'top', horizontalPosition: 'center', 
-      direction: 'ltr', duration: 30 * 1000});
+      direction: 'ltr', duration: 10 * 1000});
+  }
+
+  resetFormulario() {
+    this.formulario.reset();
+
+    Object.keys(this.formulario.controls).forEach(key => {
+      this.formulario.get(key)?.setErrors(null);
+    })
   }
 
 }
