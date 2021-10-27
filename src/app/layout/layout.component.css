@@ -1,0 +1,23 @@
+mat-sidenav-container {
+   height: 100%;
+}
+
+mat-sidenav {
+   width: 25vw;
+   color: #6e7076;
+}
+
+header {
+   position: sticky;
+   top: 0;
+   left: 0;
+   z-index: 9999;
+   padding: 10px 0 0 10px;
+   background-color: #fff;
+}
+
+.tarefas-component {
+   background-color: var(--tarefas-bg-color);
+}
+
+

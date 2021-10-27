@@ -1,0 +1,18 @@
+<div class="h-100">
+   <mat-sidenav-container>
+      <mat-sidenav mode="side" opened >
+         <header>
+            <h3>To Do List</h3>
+            <div class="d-flex">
+               <mat-icon color="primary" style="transform: scale(2); margin-left: 10px; margin-right: 10px;">account_circle</mat-icon>
+               <h3 class="ms-1">{{ emailUser }}</h3>
+            </div>
+            <mat-divider></mat-divider>
+         </header> 
+         <app-lista-de-tarefas></app-lista-de-tarefas>
+      </mat-sidenav>
+      <mat-sidenav-content class="tarefas-component">
+         <router-outlet></router-outlet>
+      </mat-sidenav-content>
+   </mat-sidenav-container>
+</div>
