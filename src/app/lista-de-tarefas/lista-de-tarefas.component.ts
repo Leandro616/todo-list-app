@@ -16,7 +16,6 @@ export class ListaDeTarefasComponent implements OnInit {
 
   listas: Lista[] = [];
   formulario: FormGroup;
-  novaLista: boolean = false;
   errorState: ErrorStateMatcher = new MyErrorStatyMatcher();
   
   constructor(

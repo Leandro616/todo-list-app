@@ -26,4 +26,12 @@ export class ListaDeTarefasService {
   getLista(id: number) : Observable<Lista> {
     return this.http.get<Lista>(`${this.url}/${id}`);
   }
+
+  atualizar(id: number, lista: Lista) : Observable<any> {
+    return this.http.put<Lista>(`${this.url}/${id}`, lista);
+  }
+
+  excluir(id: number) : Observable<any> {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

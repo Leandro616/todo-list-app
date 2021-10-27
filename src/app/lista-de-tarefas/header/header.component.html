@@ -1,0 +1,32 @@
+<div class="d-flex">
+   <h1 class="flex-grow-1" *ngIf="!editando" >
+      {{ lista.nome }}
+   </h1>
+   <div class="flex-grow-1">
+      <form [formGroup]="formulario" *ngIf="editando" (ngSubmit)="atualizarLista()" 
+            id="formulario" >   
+         <input type="text" formControlName="nome" id="inputNome" autocomplete="off">
+
+         <button type="submit" mat-icon-button matSuffix>
+            <mat-icon>done</mat-icon>
+         </button>
+         <button type="button" mat-icon-button matSuffix (click)="editando = false">
+            <mat-icon>close</mat-icon>
+         </button>
+      </form>
+   </div>
+   <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+   </button>
+</div>
+
+<mat-menu #menu="matMenu">
+   <button mat-menu-item [disabled]="lista.padrao" (click)="prepararEdicao()">
+      <mat-icon>edit</mat-icon>
+      <span>Renomear lista</span>
+   </button>
+   <button mat-menu-item [disabled]="lista.padrao" (click)="abrirDialog()">
+      <mat-icon>delete</mat-icon>
+      <span>Excluir</span>
+   </button>
+</mat-menu>

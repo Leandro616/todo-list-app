@@ -1,6 +1,11 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -13,12 +18,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+
 import { ScrollingModule } from '@angular/cdk/scrolling'
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { AuthService } from './auth.service';
 import { LayoutComponent } from './layout/layout.component';
 import { ListaDeTarefasService } from './lista-de-tarefas.service';
@@ -26,9 +29,7 @@ import { ListaDeTarefasComponent } from './lista-de-tarefas/lista-de-tarefas.com
 import { LoginComponent } from './login/login.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
 import { TokenInterceptor } from './token.interceptor';
-
-
-
+import { ExcluirListaDialog, HeaderComponent } from './lista-de-tarefas/header/header.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -48,7 +49,9 @@ export const MY_DATE_FORMATS = {
     ListaDeTarefasComponent,
     LoginComponent,
     LayoutComponent,
-    TarefasComponent
+    TarefasComponent,
+    HeaderComponent,
+    ExcluirListaDialog
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ export const MY_DATE_FORMATS = {
     MatDatepickerModule,
     MatExpansionModule,
     MatBadgeModule,
+    MatMenuModule,
     ScrollingModule
   ],
   providers: [
