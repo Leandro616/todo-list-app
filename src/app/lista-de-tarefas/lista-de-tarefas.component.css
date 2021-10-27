@@ -1,0 +1,17 @@
+.lista:hover {
+   cursor: default;
+   background-color: #dfdfdf7e;
+}
+
+footer {
+   position: sticky;
+   bottom: 0;
+   left: 0;
+   background-color: #fff;
+}
+
+footer form {
+   padding:0 10px 10px;
+}
+
+
