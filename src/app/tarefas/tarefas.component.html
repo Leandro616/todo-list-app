@@ -1,0 +1,75 @@
+<header>
+   <h1>{{ nomeLista }}</h1>
+</header>
+
+<main>
+   <!-- tarefas não concluidas -->
+   <section>
+      <mat-card *ngFor="let tarefa of tarefas" class="mb-2 pb-0">
+         <div class="d-flex">
+            <mat-card-title class="flex-grow-1">
+               <button mat-icon-button class="btn-finalizar">
+                  <mat-icon class="icon-circle">radio_button_unchecked</mat-icon>
+                  <mat-icon class="icon-check">task_alt</mat-icon>
+               </button>
+               <span class="align-middle">{{ tarefa.descricao }}</span>
+            </mat-card-title>
+            <div>
+               <span class="d-block">concluir em: {{ tarefa.dtConclusao }} </span>
+               <span>criada em: {{ tarefa.dtCriacao }} </span>
+            </div>
+            <mat-card-actions class="ms-3 p-0">
+               <button mat-icon-button color="accent" class="me-1">
+                  <mat-icon>edit</mat-icon>
+               </button>
+               <button mat-icon-button color="warn">
+                  <mat-icon>delete</mat-icon>
+               </button>
+            </mat-card-actions>
+         </div>
+      </mat-card>
+   </section>
+
+   <button mat-button matBadge="7" matBadgeColor="accent" (click)="exibirFinalizadas=!exibirFinalizadas" class="my-4">
+      <mat-icon>{{ exibirFinalizadas ? 'expand_more' : 'chevron_right' }}</mat-icon>concluídas
+   </button>
+
+   <!-- tarefas concluidas -->
+   <section>
+      <mat-accordion *ngIf="exibirFinalizadas">
+         <mat-expansion-panel *ngFor="let tarefa of tarefas" hideToggle>
+            <mat-expansion-panel-header>
+               <mat-panel-title>
+                  <mat-icon>done</mat-icon>
+                  <span style="text-decoration: line-through;">{{ tarefa.descricao }}</span>
+               </mat-panel-title>
+               <mat-panel-description>
+                  Criada em {{ tarefa.dtCriacao }}
+               </mat-panel-description>
+               Concluída em: {{ tarefa.dtConclusao }}
+            </mat-expansion-panel-header>
+            <mat-action-row>
+               <button mat-flat-button color="warn">Excluir</button>
+            </mat-action-row>
+         </mat-expansion-panel>
+      </mat-accordion>
+   </section>
+</main>
+
+<footer>
+   <form [formGroup]="formulario" (ngSubmit)="salvar()" class="pb-2 d-flex">
+      <mat-form-field appearance="standard" class="mx-2 flex-grow-1">
+         <mat-label>Nova Tarefa</mat-label>
+         <input matInput formControlName="descricao" [errorStateMatcher]="errorState"
+            autocomplete="off" placeholder="Insira uma descrição">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+         <mat-label>Data de conclusão</mat-label>
+         <input matInput [matDatepicker]="dtPicker" formControlName="dtConclusao" (focus)="dtPicker.open()" readonly>
+         <mat-datepicker-toggle matSuffix [for]="dtPicker">
+            <mat-datepicker #dtPicker></mat-datepicker>
+         </mat-datepicker-toggle>
+      </mat-form-field>
+      <button type="submit" mat-button>Salvar</button>
+   </form>
+</footer>

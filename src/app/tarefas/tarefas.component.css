@@ -1,0 +1,35 @@
+header {
+   position: sticky;
+   top: 0;
+   left: 0;
+   z-index: 9999;
+   padding: 30px 0 10px 30px;
+   background-color: var(--tarefas-bg-color);
+}
+main {
+   margin: 0 20px;
+}
+
+mat-card-title {
+   font-size: 15px;
+}
+
+.btn-finalizar mat-icon.icon-check {
+   display: none;
+}
+
+.btn-finalizar:hover mat-icon.icon-circle {
+   display: none;
+}
+
+.btn-finalizar:hover mat-icon.icon-check {
+   display: inline-block;
+}
+
+footer {
+   position: sticky;
+   bottom: 0;
+   right: 0;
+   background-color: var(--tarefas-bg-color);
+   padding: 0 20px;
+}
