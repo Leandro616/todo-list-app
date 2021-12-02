@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Editar tarefa</h1>
+<div mat-dialog-content>
+   <form [formGroup]="dados.formulario">
+      <mat-form-field appearance="fill" class="me-2">
+         <mat-label>Nova Tarefa</mat-label>
+         <input matInput formControlName="descricao" autocomplete="off" 
+            placeholder="Insira uma descrição">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+         <mat-label>Data de conclusão</mat-label>
+         <input matInput [matDatepicker]="dtPicker" formControlName="dtConclusao" 
+            (focus)="dtPicker.open()">
+         <mat-datepicker-toggle matSuffix [for]="dtPicker">
+            <mat-datepicker [startAt]="dados.date" #dtPicker></mat-datepicker>
+         </mat-datepicker-toggle>
+      </mat-form-field>
+   </form>
+   
+</div>
+<div mat-dialog-actions >
+   <button mat-button mat-dialog-close>Cancelar</button>
+   <button [disabled]="!dados.formulario.valid" mat-flat-button color="primary"
+         [mat-dialog-close]="dados.formulario">Salvar</button>
+</div>

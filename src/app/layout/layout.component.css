@@ -17,7 +17,7 @@ header {
 }
 
 .tarefas-component {
-   background-color: var(--tarefas-bg-color);
+   background: var(--tarefas-bg-color);
 }
 
 

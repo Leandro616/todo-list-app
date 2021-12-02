@@ -1,20 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-   --tarefas-bg-color: #9c88d3;
+   --tarefas-bg-color: #868bf0;
+   --tarefas-bg-color-top: #868bf0a8;
 }
 
 html, body { 
    height: 100%; 
-   background: rgb(251,225,255);
-   background: linear-gradient(90deg, rgba(251,225,255,1) 0%, rgba(208,224,255,1) 47%, rgba(233,217,250,1) 100%);
+   /* background: rgb(251,225,255);
+   background: linear-gradient(90deg, rgba(251,225,255,1) 0%, rgba(208,224,255,1) 47%, rgba(233,217,250,1) 100%); */
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 ::-webkit-scrollbar {
    background: transparent;
-   width: 7px;
+   width: 5px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -9,20 +9,37 @@ import { Tarefa } from './tarefas/tarefa';
 })
 export class TarefasService {
 
-  urlPrefix: string = environment.apiUrlBase + "/api/listas/";
-  urlSuffix: string = "/tarefas";
-
+  
   constructor(
     private http: HttpClient
   ) { }
 
   listar(idLista: number) : Observable<Tarefa[]> {
-    const url = this.urlPrefix + idLista + this.urlSuffix;
-    return this.http.get<Tarefa[]>(url);
+    return this.http.get<Tarefa[]>(this.getUrl(idLista));
   }
 
   salvar(tarefa: Tarefa, idLista: number) : Observable<any> {
-    const url = this.urlPrefix + idLista + this.urlSuffix;
-    return this.http.post<Tarefa>(url, tarefa);
+    return this.http.post<Tarefa>(this.getUrl(idLista), tarefa);
+  }
+
+  finalizar(tarefa: Tarefa, idLista: number) : Observable<any> {
+    return this.http
+      .put<any>(`${this.getUrl(idLista)}/${tarefa.id}/finalizacao`, null);
+  }
+
+  excluir(id: number, idLista:number) : Observable<any> {
+    return this.http.delete(`${this.getUrl(idLista)}/${id}`);
+  }
+  
+  atualizar(tarefa: Tarefa, idLista:number) : Observable<any> {
+    return this.http
+      .put<Tarefa>(`${this.getUrl(idLista)}/${tarefa.id}`, tarefa);
+  }
+
+  private getUrl(idLista: number) : string {
+    const urlPrefix: string = environment.apiUrlBase + "/api/listas/";
+    const urlSuffix: string = "/tarefas";
+
+    return urlPrefix + idLista + urlSuffix;
   }
 }

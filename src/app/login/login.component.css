@@ -1,7 +1,26 @@
+.login {
+   height: 100%;
+   background: linear-gradient(90deg, rgba(251,225,255,1) 0%, rgba(208,224,255,1) 47%, rgba(233,217,250,1) 100%);
+}
+
+header {
+   padding-top: 50px;
+}
+
 .row {
-   padding-top: 100px;
+   padding-top: 150px;
 }
 
 mat-form-field {
    width: 75%;
+}
+
+footer {
+   height: 50px;
+}
+
+.social img {
+   width: 30px;
+   height: 30px;
+   margin-right: 10px;
 }

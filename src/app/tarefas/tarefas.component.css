@@ -1,13 +1,14 @@
 header {
+   background: var(--tarefas-bg-color-top);
+   backdrop-filter: blur(5px);
    position: sticky;
    top: 0;
    left: 0;
    z-index: 9999;
-   padding: 30px 30px 10px;
-   background-color: var(--tarefas-bg-color);
+   padding: 50px 45px 10px; 
 }
 main {
-   margin: 0 20px;
+   margin: 0 45px;
 }
 
 mat-card-title {
@@ -30,6 +31,10 @@ footer {
    position: sticky;
    bottom: 0;
    right: 0;
-   background-color: var(--tarefas-bg-color);
-   padding: 0 20px;
+   background: var(--tarefas-bg-color);
+   padding: 0 45px;
+}
+
+footer form {
+   font-size: 17px;
 }

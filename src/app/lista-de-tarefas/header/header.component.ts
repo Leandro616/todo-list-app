@@ -60,8 +60,10 @@ export class HeaderComponent implements OnInit {
     })
     
     dialogRef.afterClosed().subscribe(resultado =>{
-      this.service.excluir(resultado.id)
-        .subscribe(resposta => this.router.navigate(['/todo-list']));
+      if (resultado) {
+        this.service.excluir(resultado.id)
+          .subscribe(() => this.router.navigate(['/todo-list']));
+      }
     })
   }
 

@@ -2,27 +2,32 @@
    <app-header></app-header>
 </header>
 
-<main>
+<main class="">
    <!-- tarefas não concluidas -->
    <section>
       <mat-card *ngFor="let tarefa of tarefas" class="mb-2 pb-0">
          <div class="d-flex">
             <mat-card-title class="flex-grow-1">
-               <button mat-icon-button class="btn-finalizar">
+               <button mat-icon-button (click)="finalizarTarefa(tarefa)"
+                     matTooltip="Concluir tarefa" class="btn-finalizar">
                   <mat-icon class="icon-circle">radio_button_unchecked</mat-icon>
                   <mat-icon class="icon-check">task_alt</mat-icon>
                </button>
                <span class="align-middle">{{ tarefa.descricao }}</span>
             </mat-card-title>
             <div>
-               <span class="d-block">concluir em: {{ tarefa.dtConclusao }} </span>
+               <span class="d-block fw-bold" [style]=corData(tarefa.dtConclusao)>
+                 {{ nomeConclusao(tarefa.dtConclusao) }}
+               </span>
                <span>criada em: {{ tarefa.dtCriacao }} </span>
             </div>
             <mat-card-actions class="ms-3 p-0">
-               <button mat-icon-button color="accent" class="me-1">
+               <button mat-icon-button color="primary" (click)="editarTarefa(tarefa)" 
+                     matTooltip="Editar tarefa" class="me-1">
                   <mat-icon>edit</mat-icon>
                </button>
-               <button mat-icon-button color="warn">
+               <button mat-icon-button color="warn" (click)="excluirTarefa(tarefa)"
+                     matTooltip="Excluir tarefa">
                   <mat-icon>delete</mat-icon>
                </button>
             </mat-card-actions>
@@ -30,14 +35,18 @@
       </mat-card>
    </section>
 
-   <button mat-button matBadge="7" matBadgeColor="accent" (click)="exibirFinalizadas=!exibirFinalizadas" class="my-4">
-      <mat-icon>{{ exibirFinalizadas ? 'expand_more' : 'chevron_right' }}</mat-icon>concluídas
+   <button mat-button *ngIf="tarefasFinalizadas.length != 0"
+         matBadge="{{ tarefasFinalizadas.length }}" matBadgeColor="accent" 
+         matTooltip="{{ exibirFinalizadas ? 'Esconder tarefas concluídas' : 'Exibir tarefas concluídas' }}"
+         (click)="exibirFinalizadas=!exibirFinalizadas" class="my-4">
+      <mat-icon>{{ exibirFinalizadas ? 'expand_more' : 'chevron_right' }}</mat-icon>
+      concluídas
    </button>
 
    <!-- tarefas concluidas -->
    <section>
       <mat-accordion *ngIf="exibirFinalizadas">
-         <mat-expansion-panel *ngFor="let tarefa of tarefas" hideToggle>
+         <mat-expansion-panel *ngFor="let tarefa of tarefasFinalizadas" hideToggle>
             <mat-expansion-panel-header>
                <mat-panel-title>
                   <mat-icon>done</mat-icon>
@@ -49,7 +58,10 @@
                Concluída em: {{ tarefa.dtConclusao }}
             </mat-expansion-panel-header>
             <mat-action-row>
-               <button mat-flat-button color="warn">Excluir</button>
+               <button mat-flat-button color="warn" (click)="excluirTarefa(tarefa)"
+                     matTooltip="Excluir tarefa definitivamente" >
+                  Excluir
+               </button>
             </mat-action-row>
          </mat-expansion-panel>
       </mat-accordion>
@@ -70,6 +82,6 @@
             <mat-datepicker #dtPicker></mat-datepicker>
          </mat-datepicker-toggle>
       </mat-form-field>
-      <button type="submit" mat-button>Salvar</button>
+      <button type="submit" mat-button matTooltip="Salvar tarefa" >Salvar</button>
    </form>
 </footer>

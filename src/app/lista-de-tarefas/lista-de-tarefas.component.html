@@ -1,5 +1,5 @@
-<section>
-   <mat-list>
+<section >
+   <mat-list class="mb-2">
       <mat-list-item *ngFor="let lista of listas" 
             class="lista" [routerLink]="['lista', lista.id]">
          {{ lista.nome }}
@@ -13,7 +13,8 @@
          <mat-label>Nova Lista</mat-label>
          <input matInput [errorStateMatcher]="errorState" formControlName="nome" 
                type="text" placeholder="Insira um nome" autocomplete="off">
-         <button type="submit" mat-icon-button matSuffix>
+         <button type="submit" mat-icon-button matSuffix
+               matTooltip="Salvar lista" >
             <mat-icon>playlist_add</mat-icon></button>
       </mat-form-field>
    </form>

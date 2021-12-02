@@ -1,11 +1,21 @@
 <div class="h-100">
    <mat-sidenav-container>
-      <mat-sidenav mode="side" opened >
+      <mat-sidenav mode="side" opened class="ms-2">
          <header>
             <h3>To Do List</h3>
             <div class="d-flex">
                <mat-icon color="primary" style="transform: scale(2); margin-left: 10px; margin-right: 10px;">account_circle</mat-icon>
-               <h3 class="ms-1">{{ emailUser }}</h3>
+               <h3 class="ms-1 flex-grow-1">{{ emailUser }}</h3>
+               <button mat-icon-button [matMenuTriggerFor]="menu"
+                     matTooltip="Opções da conta">
+                  <mat-icon class="mb-2">more_vert</mat-icon>
+               </button>
+               <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="logout()" >
+                     <mat-icon>logout</mat-icon>
+                     <span>Sair</span>
+                   </button>
+               </mat-menu>
             </div>
             <mat-divider></mat-divider>
          </header> 

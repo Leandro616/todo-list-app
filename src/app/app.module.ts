@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipDefaultOptions, MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 
 import { ScrollingModule } from '@angular/cdk/scrolling'
 import { AuthService } from './auth.service';
@@ -27,7 +28,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { ListaDeTarefasService } from './lista-de-tarefas.service';
 import { ListaDeTarefasComponent } from './lista-de-tarefas/lista-de-tarefas.component';
 import { LoginComponent } from './login/login.component';
-import { TarefasComponent } from './tarefas/tarefas.component';
+import { EditarTarefaDialog, TarefasComponent } from './tarefas/tarefas.component';
 import { TokenInterceptor } from './token.interceptor';
 import { ExcluirListaDialog, HeaderComponent } from './lista-de-tarefas/header/header.component';
 
@@ -43,6 +44,12 @@ export const MY_DATE_FORMATS = {
   },
 };
 
+export const MY_TOOLTIP_OPTIONS: MatTooltipDefaultOptions = {
+  showDelay: 800,
+  hideDelay: 500,
+  touchendHideDelay: 1500,
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +58,8 @@ export const MY_DATE_FORMATS = {
     LayoutComponent,
     TarefasComponent,
     HeaderComponent,
-    ExcluirListaDialog
+    ExcluirListaDialog,
+    EditarTarefaDialog
   ],
   imports: [
     BrowserModule,
@@ -73,6 +81,7 @@ export const MY_DATE_FORMATS = {
     MatExpansionModule,
     MatBadgeModule,
     MatMenuModule,
+    MatTooltipModule,
     ScrollingModule
   ],
   providers: [
@@ -88,6 +97,11 @@ export const MY_DATE_FORMATS = {
     { 
       provide: MAT_DATE_LOCALE,
       useValue: 'pt-BR'
+    },
+    // configuração do tempo de exibição e ocultação do MatToolTip
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS, 
+      useValue: MY_TOOLTIP_OPTIONS
     }
   ],
   bootstrap: [AppComponent]
